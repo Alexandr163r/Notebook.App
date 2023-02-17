@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-title>
+    <h2>Добавить запись</h2>
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="userForm" (ngSubmit)="SaveUser()" >
+
+      <mat-form-field>
+        <mat-label>Имя</mat-label>
+        <input id = "name" placeholder="Имя" matInput formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Фамилия</mat-label>
+        <input placeholder="Фамилия" matInput formControlName="surname">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Год рождения</mat-label>
+        <input placeholder="Год рождения" matInput formControlName="yearOfBirth">
+      </mat-form-field>
+
+      <table formArrayName="phoneInformations">
+        <tbody>
+        <tr *ngFor="let phone of phones.controls;let i=index" [formGroupName]="i">
+          <input matInput placeholder="Номер телефона" formControlName="phoneNumber">
+          <td><button mat-button color="accent" (click)="RemovePhone(i)">(-)</button></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <a mat-raised-button color="primary" (click)="Addnewrow()">Добавить телефон(+)</a>
+      </div>
+
+      <div>
+        <button mat-raised-button color="warn" mat-dialog-close> Отмена </button>
+        <button type="submit"  mat-raised-button color="primary" cdkFocusInitial > Сохранить </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
